@@ -442,6 +442,14 @@ int main(void)
     // --- Init RTT first (so we can debug early) ---
     rtt_init();
 
+#ifdef UART_TX_SELFTEST
+    // UART TX bring-up aid: verify the DIO3 -> FTDI path and baud with only an
+    // FTDI adapter (no J-Link). Enable with `make CFLAGS+=-DUART_TX_SELFTEST`.
+    // Runs for a few seconds, then normal boot continues. See rtt.c for how to
+    // read the output and how to correct the baud via -DUART_CLK_HZ.
+    rtt_uart_selftest();
+#endif
+
     // --- Check for warm boot (wakeup from standby) ---
     // Primary: IOC latch frozen (IOCLATCH_EN==0) — set by enter_sleep() before
     //   standby, synced via SysCtrlAonSync. TI-recommended detection method.

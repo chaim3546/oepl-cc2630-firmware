@@ -18,4 +18,9 @@ void rtt_puts(const char *s);
 void rtt_put_hex8(uint8_t val);
 void rtt_put_hex32(uint32_t val);
 
+// UART TX bring-up self-test (no J-Link needed). Streams 'U' + a readable line
+// on DIO3 to verify the TX path and baud. See rtt.c for usage. Call early in
+// main(); gate the call behind -DUART_TX_SELFTEST so it's inert by default.
+void rtt_uart_selftest(void);
+
 #endif
