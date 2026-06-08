@@ -54,6 +54,11 @@ DEFINES = \
 	-DCC2630 \
 	-DOEPL_TARGET_CC2630 \
 	-DOEPL_DISPLAY_UC8159_600X448
+# UART debug bring-up (no J-Link needed). Uncomment to stream a 'U'/text test
+# pattern on DIO3 at boot to verify the TX path + baud. If 115200 is garbage,
+# find the baud that decodes cleanly and set the real clock, e.g.:
+#   DEFINES += -DUART_TX_SELFTEST -DUART_CLK_HZ=24000000
+# DEFINES += -DUART_TX_SELFTEST
 
 # Compiler flags
 CFLAGS = \
